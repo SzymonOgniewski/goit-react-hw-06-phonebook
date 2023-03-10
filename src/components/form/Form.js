@@ -1,17 +1,26 @@
 import React from 'react';
 import { Input } from './FormInput/FormInput';
 import css from './form.module.css';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addContactAction } from 'components/Contacts/redux/actions';
 
-export const Form = ({ handleChange, handleSubmit, name, number }) => {
-  
+export const Form = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.elements.name.value;
+    const number = form.elements.number.value;
+    dispatch(addContactAction(name, number));
+    form.reset();
+  };
+
   return (
     <div className={css.container}>
       <h2 className={css.title}>Phonebook</h2>
       <form onSubmit={handleSubmit} className={css.form}>
         <Input
-          handleChange={handleChange}
-          value={name}
           placeholder="Enter Name"
           type="text"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -21,8 +30,6 @@ export const Form = ({ handleChange, handleSubmit, name, number }) => {
           htmlFor="name"
         />
         <Input
-          handleChange={handleChange}
-          value={number}
           placeholder="Enter phone number"
           type="tel"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -37,10 +44,4 @@ export const Form = ({ handleChange, handleSubmit, name, number }) => {
       </form>
     </div>
   );
-};
-Form.propTypes = {
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  name: PropTypes.string,
-  number: PropTypes.string,
 };
