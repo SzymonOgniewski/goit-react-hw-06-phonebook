@@ -18,6 +18,13 @@ export const rootReducer = (state = initialState, action) => {
         contacts: state.contacts.filter(contact => contact.id !== id),
       };
     }
+    case 'filter/changeFilter': {
+      const { filter } = action.payload;
+      return {
+        ...state,
+        filter: (state.filter = filter),
+      };
+    }
     default:
       return state;
   }

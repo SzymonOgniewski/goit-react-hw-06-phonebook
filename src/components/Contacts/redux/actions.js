@@ -1,9 +1,9 @@
 import { nanoid } from 'nanoid';
 
-export const changeData = filter => {
+export const changeFilterAction = filter => {
   return {
-    type: 'data/changeData',
-    payload: { filter },
+    type: 'filter/changeFilter',
+    payload: { filter: filter },
   };
 };
 

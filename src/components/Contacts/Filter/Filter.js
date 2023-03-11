@@ -1,7 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { changeFilterAction } from '../redux/actions';
 import css from './filter.module.css';
-export const Filter = ({ filter, handleChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const changeFilter = e => {
+    dispatch(changeFilterAction(e.target.value));
+  };
   return (
     <>
       <label className={css.label} htmlFor="filter">
@@ -10,17 +14,12 @@ export const Filter = ({ filter, handleChange }) => {
 
       <input
         className={css.input}
-        onChange={handleChange}
+        onChange={changeFilter}
         autoComplete="off"
         type="text"
         name="filter"
-        value={filter}
         placeholder="search"
       />
     </>
   );
-};
-Filter.propTypes = {
-  filter: PropTypes.string,
-  handleChange: PropTypes.func,
 };
