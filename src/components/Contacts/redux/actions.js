@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 export const changeFilterAction = filter => {
   return {
     type: 'filter/changeFilter',
-    payload: { filter: filter },
+    payload: { filter },
   };
 };
 

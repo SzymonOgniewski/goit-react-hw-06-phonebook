@@ -1,14 +1,14 @@
-const initialState = {
-  contacts: JSON.parse(localStorage.getItem('savedContacts')) || [],
-  filter: '',
-};
-export const rootReducer = (state = initialState, action) => {
+const contactsInitState =
+  JSON.parse(localStorage.getItem('savedContacts')) || [];
+export const contactsReducer = (state = contactsInitState, action) => {
   switch (action.type) {
     case 'contacts/addContact': {
       const { id, name, number } = action.payload;
+      console.log(state.contacts);
+      console.log(id, name, number);
+      console.log(state);
       return {
-        ...state,
-        contacts: state.contacts.concat({ id, name, number }),
+        contacts: state.concat({ id, name, number }),
       };
     }
     case 'contacts/deleteContact': {
@@ -18,11 +18,19 @@ export const rootReducer = (state = initialState, action) => {
         contacts: state.contacts.filter(contact => contact.id !== id),
       };
     }
+    default:
+      return state;
+  }
+};
+
+const filterInitState = '';
+export const filterReducer = (state = filterInitState, action) => {
+  switch (action.type) {
     case 'filter/changeFilter': {
       const { filter } = action.payload;
       return {
         ...state,
-        filter: (state.filter = filter),
+        filter: (state = filter),
       };
     }
     default:
