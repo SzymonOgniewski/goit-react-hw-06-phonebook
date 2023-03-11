@@ -2,8 +2,7 @@ import React from 'react';
 import { Input } from './FormInput/FormInput';
 import css from './form.module.css';
 import { useDispatch } from 'react-redux';
-import { addContactAction } from 'components/Contacts/redux/actions';
-
+import { addContactAction } from 'components/Contacts/redux/contactsSlice';
 export const Form = () => {
   const dispatch = useDispatch();
 
